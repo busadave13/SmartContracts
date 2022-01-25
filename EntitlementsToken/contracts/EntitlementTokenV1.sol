@@ -46,4 +46,11 @@ contract Entitlements is Ownable {
 
         return _users[puid][productId].state;
     }
+
+    function details(
+        string memory puid,
+        string memory productId) public view returns (EntitlementData memory) {
+
+        return _users[puid][productId];
+    }
 }

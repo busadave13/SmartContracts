@@ -23,8 +23,18 @@ describe("Entitlements contract", function () {
 
     it("Can revoke entitlement", async function() {     
 
+      await instance.grant("1", "12345");
+      expect(await instance.state("1", "12345")).to.equal(0);
       await instance.revoke("1", "12345");
       expect(await instance.state("1", "12345")).to.equal(1);
+    });
+
+    it("Can get entitlement details", async function() {     
+
+      await instance.grant("1", "12345");
+      const details = await instance.details("1", "12345");
+      expect(details.state).to.equal(0);
+      expect(details.productId).to.equal("12345");
     });
 
   });
